@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Body, Depends
+from fastapi.middleware.cors import CORSMiddleware
 
 from typing import Annotated
 from sqlalchemy.orm import Session
@@ -19,6 +20,21 @@ from .database import get_db
 
 
 app = FastAPI()
+
+# CORS for frontend dev server
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
