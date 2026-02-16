@@ -1,0 +1,10 @@
+fastapi
+sqlalchemy
+bcrypt
+PyJWT
+python-decouple
+httpx
+email-validator
+pytest
+uvicorn
+alembic
