@@ -40,4 +40,4 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ghcr.io/maskedttn/restaurant-backend:${{ steps.vars.outputs.TAG }}
+          tags: ghcr.io/maskedttn/restaurant-POS-backend:${{ steps.vars.outputs.TAG }}
