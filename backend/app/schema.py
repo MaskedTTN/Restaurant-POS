@@ -42,13 +42,15 @@ class UserLoginSchema(BaseModel):
 
 class OrganizationSchema(BaseModel):
     name: str = Field(...)
-    address: str = Field(...)
+    address: str = Field(default="")
+    description: str = Field(default="")
 
     class Config:
         json_schema_extra = {
             "example": {
                 "name": "Tech Corp",
-                "address": "123 Tech Street, Silicon Valley, CA"
+                "address": "123 Tech Street, Silicon Valley, CA",
+                "description": "A short description of the organization"
             }
         }
 

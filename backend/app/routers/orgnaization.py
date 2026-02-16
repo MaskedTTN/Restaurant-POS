@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, Request
 from fastapi.params import Depends
 from keystone import LicenseValidationError, LicenseValidator
 
@@ -14,7 +14,13 @@ from sqlalchemy.orm import Session
 router = APIRouter(prefix="/organization", tags=["organization"])
 
 @router.post("/create", dependencies=[Depends(JWTBearer())])
-async def create_organization(db: Session = Depends(get_db), current_user: User = Depends(get_current_user), organization: OrganizationSchema = Body(...)):
+async def create_organization(request: Request, db: Session = Depends(get_db), current_user: User = Depends(get_current_user), organization: OrganizationSchema = Body(...)):
+    # debug: log incoming authorization header
+    try:
+        auth_header = request.headers.get('authorization')
+        print(f"[debug] /organization/create Authorization: {auth_header}")
+    except Exception:
+        pass
     new_organization = Organization(
         name=organization.name
     )

@@ -41,6 +41,7 @@ async def register_device(db: Session = Depends(get_db), current_user: User = De
         return {"error": "No license found for organization"}
     try:
         validator = LicenseValidator()
+        print(f"Validating license key: {license.license_key}")
         info = validator.get_license_info(license.license_key)
         if not info:
             return {"error": "Invalid license"}
@@ -96,7 +97,7 @@ async def list_devices(db: Session = Depends(get_db), current_user: User = Depen
     # Get all devices for locations that the user has access to
     org_user = db.query(OrganizationUser).filter(
         OrganizationUser.user_id == current_user.id
-    ).first()
+    ).all()
     if not org_user:
         return {"error": "User not authorized"}
 
@@ -117,5 +118,6 @@ async def list_devices(db: Session = Depends(get_db), current_user: User = Depen
             "registered_at": device.registered_at,
             "last_active_at": device.last_active_at
         })
+    print(f"[devices] User {current_user.email} accessed device list: {len(device_list)} devices found")
 
     return {"devices": device_list}

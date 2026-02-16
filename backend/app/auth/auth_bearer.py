@@ -13,8 +13,17 @@ class JWTBearer(HTTPBearer):
         if credentials:
             if not credentials.scheme == "Bearer":
                 raise HTTPException(status_code=403, detail="Invalid authentication scheme.")
+            # Log a short summary of the token for debugging (do not log full token in production)
+            try:
+                token_preview = (credentials.credentials[:16] + '...') if len(credentials.credentials) > 16 else credentials.credentials
+            except Exception:
+                token_preview = '<unreadable-token>'
+            print(f"[auth] Received Bearer token preview={token_preview} length={len(credentials.credentials)}")
+
             if not self.verify_jwt(credentials.credentials):
+                print("[auth] Token verification failed")
                 raise HTTPException(status_code=403, detail="Invalid token or expired token.")
+            print("[auth] Token verification succeeded")
             return credentials.credentials
         else:
             raise HTTPException(status_code=403, detail="Invalid authorization code.")
