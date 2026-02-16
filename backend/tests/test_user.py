@@ -23,3 +23,4 @@ def test_user_signup_and_login(client):
     r3 = client.post("/user/login", json=bad_login)
     assert r3.status_code == 200
     assert r3.json().get("error") == "Wrong login details!"
+    
