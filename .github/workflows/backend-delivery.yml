@@ -5,14 +5,7 @@ on:
     workflows: ["Run backend tests"]
     types:
       - completed
-  push:
     branches: ["*"]
-    paths:
-      - "backend/**"
-      - ".github/workflows/backend-delivery.yml"
-  pull_request:
-    paths:
-      - "backend/**"
 
 permissions:
   contents: read
