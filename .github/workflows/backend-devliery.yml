@@ -2,10 +2,10 @@ name: Build Backend Docker Image
 
 on:
   push:
-    branches: [main, develop]
+    branches: ["*"]
     paths:
       - "backend/**"
-      - ".github/workflows/backend-docker.yml"
+      - ".github/workflows/backend-delivery.yml"
   pull_request:
     paths:
       - "backend/**"
@@ -39,6 +39,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: product/Dockerfile
+          file: backend/Dockerfile
           push: true
           tags: ghcr.io/maskedttn/restaurant-backend:${{ steps.vars.outputs.TAG }}
