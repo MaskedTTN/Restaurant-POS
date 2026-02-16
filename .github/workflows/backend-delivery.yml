@@ -39,6 +39,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./backend
-          file: Dockerfile
           push: true
           tags: ghcr.io/maskedttn/restaurant-backend:${{ steps.vars.outputs.TAG }}
