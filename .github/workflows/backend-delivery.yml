@@ -1,6 +1,7 @@
 name: Build Backend Docker Image
 
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["Run backend tests"]
     types:
