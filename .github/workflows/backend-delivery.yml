@@ -38,7 +38,7 @@ jobs:
       - name: Build and push backend image to GHCR
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: backend/Dockerfile
+          context: ./backend
+          file: Dockerfile
           push: true
           tags: ghcr.io/maskedttn/restaurant-backend:${{ steps.vars.outputs.TAG }}
