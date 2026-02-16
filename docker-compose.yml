@@ -16,9 +16,7 @@ services:
       - pos-network
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: ghcr.io/maskedttn/restaurant-pos-backend:staging
     environment:
       - db_url=${DB_URL}
       - secret=${BACKEND_SECRET}
@@ -29,9 +27,7 @@ services:
       - pos-network
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: ghcr.io/maskedttn/restaurant-pos-frontend:staging
     ports:
       - "3000:3000"
     environment:
