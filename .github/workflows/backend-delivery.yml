@@ -3,6 +3,8 @@ name: Build Backend Docker Image
 on:
   workflow_run:
     workflows: ["Run backend tests"]
+    types:
+      - completed
   push:
     branches: ["*"]
     paths:
