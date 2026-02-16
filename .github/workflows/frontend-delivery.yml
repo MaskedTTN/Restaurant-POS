@@ -26,7 +26,7 @@ jobs:
           node-version: "20"
 
       - name: Generate package-lock.json for frontend
-        working-directory: product/frontend
+        working-directory: ./frontend
         run: |
           if [ ! -f package-lock.json ]; then
             echo "Generating package-lock.json..."
