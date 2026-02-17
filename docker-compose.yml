@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pos-network
+
+  backend:
+    image: ghcr.io/maskedttn/restaurant-pos-backend:staging
+    environment:
+      - db_url=${DB_URL}
+      - secret=${BACKEND_SECRET}
+      - algorithm=${ALGORITHM}
+    depends_on:
+      - db
+    networks:
+      - pos-network
+
+  frontend:
+    image: ghcr.io/maskedttn/restaurant-pos-frontend:staging
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8081
+      - NEXT_TELEMETRY_DISABLED=1
+    depends_on:
+      - backend
+    networks:
+      - pos-network
+
+networks:
+  pos-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
