@@ -6,7 +6,7 @@ from decouple import config
 
 
 JWT_SECRET = config("secret", default="my-default-jwt-secret-key-123")
-JWT_ALGORITHM = config("algorithm", default="HS256")
+JWT_ALGORITHM = "HS256"
 
 
 def token_response(token: str):
