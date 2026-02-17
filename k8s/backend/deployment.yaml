@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: restaurant
+  namespace: restaurant-pos
   labels:
     app: backend
     tier: api
@@ -31,6 +31,16 @@ spec:
                 secretKeyRef:
                   name: backend-secrets
                   key: db-password
+            - name: secret
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: secret
+            - name: algorithm
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: algorithm
           resources:
             requests:
               memory: "128Mi"
