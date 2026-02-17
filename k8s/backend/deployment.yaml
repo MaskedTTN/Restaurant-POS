@@ -36,6 +36,11 @@ spec:
                 secretKeyRef:
                   name: backend-secrets
                   key: secret
+            - name: algorithm
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: algorithm
           resources:
             requests:
               memory: "128Mi"
