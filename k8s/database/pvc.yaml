@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: restaurant
+spec:
+  accessModes:
+    - ReadWriteOnce # One pod can mount R/W
+  resources:
+    requests:
+      storage: 1Gi # 1GB storage
