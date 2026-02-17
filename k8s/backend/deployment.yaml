@@ -31,6 +31,11 @@ spec:
                 secretKeyRef:
                   name: backend-secrets
                   key: db-password
+            - name: secret
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: secret
           resources:
             requests:
               memory: "128Mi"
