@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: restaurant-POS
+data:
+  DATABASE_HOST: "postgres-service" # Points to DB service
+  DATABASE_PORT: "5432"
+  DATABASE_NAME: "restaurant_db"
+  APP_ENV: "development"
+  API_PORT: "8000"
