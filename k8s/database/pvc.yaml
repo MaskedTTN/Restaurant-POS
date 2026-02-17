@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
-  namespace: restaurant
+  namespace: restaurant-pos
 spec:
   accessModes:
     - ReadWriteOnce # One pod can mount R/W
